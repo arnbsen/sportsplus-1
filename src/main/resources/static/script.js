@@ -1,6 +1,7 @@
 
+var nlo;
 var app = angular.module("app", [ "ngRoute" ]).run(function($location,$rootScope) {
-	$rootScope.server = {url: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '')};
+	nlo = {url: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '')};
 });
 
 app.config([ '$routeProvider', function($routeProvider) {
@@ -55,7 +56,7 @@ app.controller("academyCtrl", function($scope, $http) {
 	$scope.fetchAcademy = function() {
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/academy/getAll'
+			url : nlo+'/academy/getAll'
 		}).success(function(data, status) {
 			console.log(data);
 			$scope.status = status;
@@ -90,7 +91,7 @@ app.controller("academyCtrl", function($scope, $http) {
 		console.log($scope.academy.upStringd);
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/academy/add',
+			url : nlo+'/academy/add',
 			headers: { 'Content-Type': 'application/json' },
 			data:$scope.academy
 		}).success(function(data, status) {
@@ -109,7 +110,7 @@ app.controller("academyCtrl", function($scope, $http) {
 		console.log(academy);
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/academy/delete',
+			url : nlo+'/academy/delete',
 			headers: { 'Content-Type': 'application/json' },
 			data:academy
 		}).success(function(data, status) {
@@ -144,7 +145,7 @@ app.controller("academyCtrl", function($scope, $http) {
 		academy.upStringd = new Date(up).getTime();
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/academy/update',
+			url : nlo+'/academy/update',
 			headers: { 'Content-Type': 'application/json' },
 			data:academy
 		}).success(function(data, status) {
@@ -187,7 +188,7 @@ app.controller("scheduleCtrl", function($scope, $http) {
 		if(checkIfOkay){
 			$http({
 				method : 'POST',
-				url : $rootScope.server.url+'/schedule/add',
+				url : nlo+'/schedule/add',
 				headers: { 'Content-Type': 'application/json' },
 				data:newSchedule
 			}).success(function(data, status) {
@@ -217,7 +218,7 @@ app.controller("groupCtrl", function($scope, $http) {
 
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/group/addGroup',
+			url : nlo+'/group/addGroup',
 			data : $scope.group
 		}).success(function(data, status) {
 			alert("Group added");
@@ -230,7 +231,7 @@ app.controller("groupCtrl", function($scope, $http) {
 	$scope.getAllGroups = function() {
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/group/getGroups'
+			url : nlo+'/group/getGroups'
 		}).success(function(data, status) {
 			$scope.groups = data;
 			
@@ -243,7 +244,7 @@ app.controller("groupCtrl", function($scope, $http) {
 	$scope.deleteGroup = function(grp) {
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/group/deleteGroup',
+			url : nlo+'/group/deleteGroup',
 			data : grp
 		}).success(function(data, status) {
 			alert("Group deleted");
@@ -257,7 +258,7 @@ app.controller("groupCtrl", function($scope, $http) {
 	$scope.fetchGroup = function() {
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/group/getAGroup',
+			url : nlo+'/group/getAGroup',
 			data : $scope.groupData
 		}).success(function(data, status) {
 			$scope.groupData = data;
@@ -270,7 +271,7 @@ app.controller("groupCtrl", function($scope, $http) {
 	$scope.updateGroup = function(grp) {
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/group/updateGroup',
+			url : nlo+'/group/updateGroup',
 			data : grp
 		}).success(function(data, status) {
 			alert("updated");
@@ -281,7 +282,7 @@ app.controller("groupCtrl", function($scope, $http) {
 	$scope.getAllCoachID = function(){
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/group/allCoachID',
+			url : nlo+'/group/allCoachID',
 		}).success(function(data, status) {
 			console.log(data);
 			$scope.allCoach = data;
@@ -292,7 +293,7 @@ app.controller("groupCtrl", function($scope, $http) {
 	$scope.fetchAid = function(){
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/schedule/getAcademyID',
+			url : nlo+'/schedule/getAcademyID',
 			headers: { 'Content-Type': 'application/json' },
 		}).success(function(data, status) {
 			$scope.aid = data;
@@ -306,7 +307,7 @@ app.controller("groupCtrl", function($scope, $http) {
 	$scope.fetchAid = function(){
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/schedule/getAcademyID',
+			url : nlo+'/schedule/getAcademyID',
 			headers: { 'Content-Type': 'application/json' },
 		}).success(function(data, status) {
 			$scope.aid = data;
@@ -319,7 +320,7 @@ app.controller("groupCtrl", function($scope, $http) {
 	$scope.fetchGid = function(s){
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/schedule/getGroupID?id=' + s,
+			url : nlo+'/schedule/getGroupID?id=' + s,
 			headers: { 'Content-Type': 'application/json' },
 		}).success(function(data, status) {
 			//console.log(s);
@@ -335,7 +336,7 @@ app.controller("groupCtrl", function($scope, $http) {
 		console.log(acg);
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/group/addCoach',
+			url : nlo+'/group/addCoach',
 			data : acg
 		}).success(function(data, status) {
 			alert("Coach added");
@@ -354,7 +355,7 @@ app.controller("coachCtrl", function($scope, $http){
 
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/coach/create',
+			url : nlo+'/coach/create',
 			data : ch
 		}).success(function(data, status) {
 			alert("Sucessful Operation");
@@ -369,7 +370,7 @@ app.controller("coachCtrl", function($scope, $http){
 	$scope.fetchAllCoaches = function(){
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/coach/all',
+			url : nlo+'/coach/all',
 		}).success(function(data, status) {
 			$scope.allCoach = data;
 		}).error(function(data, status) {
@@ -381,7 +382,7 @@ app.controller("coachCtrl", function($scope, $http){
 		var ret = ch;
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/coach/create',
+			url : nlo+'/coach/create',
 			data : ch
 		}).success(function(data, status) {
 			alert("Sucessful Operation");
@@ -399,7 +400,7 @@ app.controller("coachCtrl", function($scope, $http){
 	$scope.deleteCoach = function(ch){
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/coach/delete',
+			url : nlo+'/coach/delete',
 			headers: { 'Content-Type': 'application/json' },
 			data:ch
 		}).success(function(data, status) {
@@ -466,7 +467,7 @@ app.controller("athleteCtrl", function($scope, $http){
 		ath.age =  Math.abs(ageDate.getUTCFullYear() - 1970);
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/Athlete/addAthlete',
+			url : nlo+'/Athlete/addAthlete',
 			headers: { 'Content-Type': 'application/json' },
 			data: ath
 		}).success(function(data, status) {
@@ -480,7 +481,7 @@ app.controller("athleteCtrl", function($scope, $http){
 	$scope.fetchAid = function(){
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/schedule/getAcademyID',
+			url : nlo+'/schedule/getAcademyID',
 			headers: { 'Content-Type': 'application/json' },
 		}).success(function(data, status) {
 			$scope.aid = data;
@@ -494,7 +495,7 @@ app.controller("athleteCtrl", function($scope, $http){
 	$scope.fetchGid = function(s){
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/schedule/getGroupID?id=' + s,
+			url : nlo+'/schedule/getGroupID?id=' + s,
 			headers: { 'Content-Type': 'application/json' },
 		}).success(function(data, status) {
 			//console.log(s);
@@ -509,7 +510,7 @@ app.controller("athleteCtrl", function($scope, $http){
 		
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/Athlete/coachByGroupID?group_id=' + g, 
+			url : nlo+'/Athlete/coachByGroupID?group_id=' + g, 
 			headers: { 'Content-Type': 'application/json' },
 		}).success(function(data, status) {
 			$scope.cid = data;
@@ -523,7 +524,7 @@ app.controller("athleteCtrl", function($scope, $http){
 	$scope.fetchAth = function(athid){
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/Athlete/athleteByID?id=' + athid, 
+			url : nlo+'/Athlete/athleteByID?id=' + athid, 
 			headers: { 'Content-Type': 'application/json' },
 		}).success(function(data, status) {
 			var v = new Date(data.dob);
@@ -540,7 +541,7 @@ app.controller("athleteCtrl", function($scope, $http){
 	$scope.deleteAth = function(ath){
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/Athlete/deleteAthlete', 
+			url : nlo+'/Athlete/deleteAthlete', 
 			headers: { 'Content-Type': 'application/json' },
 			data:ath
 		}).success(function(data, status) {
@@ -683,7 +684,7 @@ app.controller("scheduleCtrl", function($scope, $http) {
 			
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/schedule/add',
+			url : nlo+'/schedule/add',
 			headers: { 'Content-Type': 'application/json' },
 			data:newSchedule
 		}).success(function(data, status) {
@@ -713,7 +714,7 @@ app.controller("scheduleCtrl", function($scope, $http) {
 	$scope.deleteSchedule = function(Schedule){
 		$http({
 			method : 'POST',
-			url : $rootScope.server.url+'/schedule/delete',
+			url : nlo+'/schedule/delete',
 			headers: { 'Content-Type': 'application/json' },
 			data:Schedule
 		}).success(function(data, status) {
@@ -733,7 +734,7 @@ app.controller("scheduleCtrl", function($scope, $http) {
 		//console.log("Trigger");
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/schedule/getAll',
+			url : nlo+'/schedule/getAll',
 			headers: { 'Content-Type': 'application/json' },
 		}).success(function(data, status) {
 			$scope.allSchedules = data;
@@ -748,7 +749,7 @@ app.controller("scheduleCtrl", function($scope, $http) {
 	$scope.fetchAllAcademyID = function(){
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/schedule/getAcademyID',
+			url : nlo+'/schedule/getAcademyID',
 			headers: { 'Content-Type': 'application/json' },
 		}).success(function(data, status) {
 			$scope.academyID = data;
@@ -769,7 +770,7 @@ app.controller("scheduleCtrl", function($scope, $http) {
 	$scope.fetchAllGroupID = function(s){
 		$http({
 			method : 'GET',
-			url : $rootScope.server.url+'/schedule/getGroupID?id=' + s,
+			url : nlo+'/schedule/getGroupID?id=' + s,
 			headers: { 'Content-Type': 'application/json' },
 		}).success(function(data, status) {
 			//console.log(s);
