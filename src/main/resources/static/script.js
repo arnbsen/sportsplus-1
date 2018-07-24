@@ -2,6 +2,7 @@
 var nlo;
 var app = angular.module("app", [ "ngRoute" ]).run(function($location,$rootScope) {
 	nlo = {url: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '')};
+	nlo = nlo.url;
 });
 
 app.config([ '$routeProvider', function($routeProvider) {
